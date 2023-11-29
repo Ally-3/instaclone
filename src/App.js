@@ -20,6 +20,12 @@ function App() {
   const [showGuidesGrid, setShowGuidesGrid] = useState(false);
   const [showTaggedGrid, setShowTaggedGrid] = useState(false);
 
+  const [boldItem, setBoldItem] = useState('POSTS', 'REELS', 'GUIDES', 'TAGGED');
+
+  const handleItemClick = (item) => {
+    setBoldItem(item);
+  };
+
   async function fetchImages(){
     const response = await fetch("https://picsum.photos/v2/list");
     var data = await response.json();
@@ -82,35 +88,59 @@ function App() {
     </Router>
       {!loggedIn ? <h1>user is logged out</h1> : <h1></h1>}
       {loggedIn && (
-        <div>
+        <div className='container'>
           <Header2 />
           <section>
             <hr style={{width: 910,}}></hr>
             <ul>
-              <li onClick={() => { 
-                setShowPostsGrid(true); 
-                setShowReelsGrid(false); 
-                setShowGuidesGrid(false); 
-                setShowTaggedGrid(false);
-                }}>POSTS</li>
-              <li onClick={() => { 
-                setShowPostsGrid(false); 
-                setShowReelsGrid(true); 
-                setShowGuidesGrid(false); 
-                setShowTaggedGrid(false);
-                }}>REELS</li>
-              <li onClick={() => { 
-                setShowPostsGrid(false); 
-                setShowReelsGrid(false); 
-                setShowGuidesGrid(true); 
-                setShowTaggedGrid(false); 
-                }}>GUIDES</li>
-              <li onClick={() => { 
-                setShowPostsGrid(false); 
-                setShowReelsGrid(false); 
-                setShowGuidesGrid(false); 
-                setShowTaggedGrid(true); 
-                }}>TAGGED</li>
+              <li
+                onClick={() => {
+                  handleItemClick('POSTS');
+                  setShowPostsGrid(true);
+                  setShowReelsGrid(false);
+                  setShowGuidesGrid(false);
+                  setShowTaggedGrid(false);
+                }}
+                className={boldItem === 'POSTS' ? 'make-bold' : ''}
+              >
+              POSTS
+              </li>
+              <li
+                onClick={() => {
+                  handleItemClick('REELS');
+                  setShowPostsGrid(false);
+                  setShowReelsGrid(true);
+                  setShowGuidesGrid(false);
+                  setShowTaggedGrid(false);
+                }}
+                className={boldItem === 'REELS' ? 'make-bold' : ''}
+              >
+              REELS
+              </li>
+              <li
+                onClick={() => {
+                  handleItemClick('GUIDES');
+                  setShowPostsGrid(false);
+                  setShowReelsGrid(false);
+                  setShowGuidesGrid(true);
+                  setShowTaggedGrid(false);
+                }}
+                className={boldItem === 'GUIDES' ? 'make-bold' : ''}
+              >
+              GUIDES
+              </li>
+              <li
+                onClick={() => {
+                  handleItemClick('TAGGED');
+                  setShowPostsGrid(false);
+                  setShowReelsGrid(false);
+                  setShowGuidesGrid(false);
+                  setShowTaggedGrid(true);
+                }}
+                className={boldItem === 'TAGGED' ? 'make-bold' : ''}
+              >
+              TAGGED
+              </li>
             </ul>
           </section>
           {showPostsGrid && (
@@ -132,7 +162,7 @@ function App() {
             </div>
           )}
           {showGuidesGrid && (
-            <div className='photo-grid'>
+            <div>
               {photos.map((item, index) => (
                 <div key={index} className='photo-item'>
                   <h2>{item.url}</h2>
@@ -141,7 +171,7 @@ function App() {
             </div>
           )}
           {showTaggedGrid && (
-            <div className='photo-grid'>
+            <div>
               {photos.map((item, index) => (
                 <div key={index} className='photo-item'>
                   <h2>{item.author}</h2>
