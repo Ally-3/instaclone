@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import instatext from './images/instatext.png';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';  //for navigation
 import Register from './components/register';
 import Login from "./components/login";
 import Logout from './components/logout';
@@ -9,8 +9,8 @@ import Header2 from './components/header2';
 import Footer from './components/footer';
 
 function App() {
-
-  const [photos, setPhotos] = useState([]); //useState variable
+  //state variables and initialization
+  const [photos, setPhotos] = useState([]);                                       
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
@@ -22,10 +22,12 @@ function App() {
 
   const [boldItem, setBoldItem] = useState('POSTS', 'REELS', 'GUIDES', 'TAGGED');
 
+  //event handling - function that sets the boldItem state variable based on the clicked item
   const handleItemClick = (item) => {
     setBoldItem(item);
   };
 
+  // Fetch images from the Picsum API using async/await and useEffect
   async function fetchImages(){
     const response = await fetch("https://picsum.photos/v2/list");
     var data = await response.json();
@@ -90,7 +92,7 @@ function App() {
       {loggedIn && (
         <div className='container'>
           <Header2 />
-          <section>
+          <section> 
             <hr style={{width: 910,}}></hr>
             <ul>
               <li
