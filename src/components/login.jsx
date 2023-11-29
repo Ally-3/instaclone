@@ -7,7 +7,7 @@ function Login(props) {
             console.log(email)
             console.log(password)
             const response = await fetch(
-                "http://localhost:5001/loginUser",
+                "https://end-user-api-2.onrender.com/loginUser",
                 {
                     method: "POST",
                     headers: {"Content-Type" : "application/json"},
