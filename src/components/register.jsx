@@ -5,7 +5,7 @@ function Register(props) {
     async function sendRegisterToBackEnd(email, password, setLoggedIn) {
         try {
             const response = await fetch(
-                "https://end-user-api-2.onrender.com/registerUser",
+                "https://instaclone-ss61.onrender.com/registerUser",
                 {
                     method: "POST",
                     headers: {"Content-Type" : "application/json"},

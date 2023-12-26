@@ -7,7 +7,7 @@ function Login(props) {
             console.log(email)
             console.log(password)
             const response = await fetch(
-                "https://end-user-api-2.onrender.com/loginUser",
+                "https://instaclone-ss61.onrender.com/loginUser",
                 {
                     method: "POST",
                     headers: {"Content-Type" : "application/json"},
