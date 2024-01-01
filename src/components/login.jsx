@@ -1,8 +1,13 @@
 import { writecookie } from "../utils/utilities";
 import instatext from '../images/instatext.png';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Login(props) {
-    async function sendLoginToBackEnd(email, password, setLoggedIn) {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    async function sendLoginToBackEnd() {
         try {
             console.log(email)
             console.log(password)
@@ -20,7 +25,7 @@ function Login(props) {
             const data = await response.json();
             console.log(data);
             writecookie("jwt_token",data.token,7);
-            setLoggedIn(true);
+            props.setLoggedIn(true);
         } catch (error) {
             console.log(error)
         }
@@ -28,7 +33,7 @@ function Login(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        sendLoginToBackEnd(props.email, props.password, props.setLoggedIn)
+        sendLoginToBackEnd();
     }
      console.log(props.email)
     return (
@@ -44,7 +49,7 @@ function Login(props) {
                     id="email" 
                     placeholder="Phone number, username, or email"
                     required 
-                    onChange = {(event) => props.setEmail(event.target.value)}>
+                    onChange = {(event) => setEmail(event.target.value)}>
                 </input>
                 <br></br>
                 <label htmlFor="password"></label>
@@ -54,7 +59,7 @@ function Login(props) {
                     id="password" 
                     placeholder="Password"
                     required 
-                    onChange = {(event) => props.setPassword(event.target.value)}>
+                    onChange = {(event) => setPassword(event.target.value)}>
                 </input>
                 <br></br>
                 <input className="input-bt" type="submit" value="Log In"/>

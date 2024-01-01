@@ -2,7 +2,6 @@ function Footer() {
     return (
         <div>
             <footer>
-                <hr></hr>
                 <ul>
                     <li>Meta</li>
                     <li>About</li>
