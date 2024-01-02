@@ -79,3 +79,12 @@
     right: 0;
   }
   
+    /* for medium screens */
+@media screen and (max-width: 820px) {
+  .carousel-img-div {
+    width: 80%;
+  }
+  .carousel-img {
+    width: 85%;
+  }
+}

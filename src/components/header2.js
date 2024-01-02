@@ -19,7 +19,7 @@ function Header2() {
      
         <div className='header2-container'>
             <div className='header2-row1'>
-          
+                
                 <div className='logobox'>
                     <div>
                         <img src={logo1} width="80%" alt="logo1" className='imagelogo'/> 
@@ -28,7 +28,13 @@ function Header2() {
         
                 <div className='header-text-div'>
                     <div className='header2-part1'>
-                        <h2>instagram <img src={tick} width="20%" alt="tick"/></h2>
+                        
+                            <div className='logobox2'>
+                                <img src={logo1} width="80%" alt="logo1" className='imagelogo'/> 
+                            </div> 
+                            <h2>
+                            instagram <img src={tick} width="20%" alt="tick"/>
+                        </h2>
                         <div className='buttons-div'>
                             <button className='follow-bt'>Follow</button>
                             <button className='msg-bt'>Message</button>
