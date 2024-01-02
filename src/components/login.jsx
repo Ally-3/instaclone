@@ -10,6 +10,7 @@ function Login(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [currentSlide, setCurrentSlide] = useState(0);
+    const [loading, setLoading] = useState(false);
 
     const images2 = [homephone2, homephone3];
 
@@ -24,33 +25,46 @@ function Login(props) {
 
     async function sendLoginToBackEnd() {
         try {
-            console.log(email)
-            console.log(password)
+            console.log(email);
+            console.log(password);
+    
             const response = await fetch(
                 "https://instaclone-ss61.onrender.com/loginUser",
                 {
                     method: "POST",
-                    headers: {"Content-Type" : "application/json"},
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
                         email: email,
-                        password: password
-                    })
+                        password: password,
+                    }),
                 }
-            )
+            );
+    
             const data = await response.json();
             console.log(data);
-            writecookie("jwt_token",data.token,7);
-            props.setLoggedIn(true);
+    
+            if (response.ok) {
+                // Check if the response status is OK (2xx)
+                writecookie("jwt_token", data.token, 7);
+                props.setLoggedIn(true);
+                props.registered(true);
+            } else {
+                // Handle unsuccessful login (e.g., display an error message)
+                console.log('Login failed:', data.error);
+            }
         } catch (error) {
-            console.log(error)
+            console.log('Error during login:', error.message);
+        } finally {
+            setLoading(false); // Set loading to false when login request completes (whether success or error)
         }
     }
+    
 
     function handleSubmit(event) {
         event.preventDefault();
         sendLoginToBackEnd();
     }
-    console.log(props.email)
+    // console.log(props.email)
 
     return (
         <div className="all-container">
@@ -90,7 +104,7 @@ function Login(props) {
                         onChange = {(event) => setPassword(event.target.value)}>
                     </input>
                     <br></br>
-                    <input className="input-bt" type="submit" value="Log In"/>
+                    <input className="input-bt" type="submit" value={loading ? "Logging in..." : "Log In"} disabled={loading}/>
                 </form>
             </div>
             <br></br>

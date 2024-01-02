@@ -5,8 +5,9 @@ import React, { useState } from 'react';
 function Register(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false); 
 
-    async function sendRegisterToBackEnd() {
+    async function sendRegisterToBackEnd(email, password, setLoggedIn, setRegistered) {
         try {
             const response = await fetch(
                 "https://instaclone-ss61.onrender.com/registerUser",
@@ -23,16 +24,20 @@ function Register(props) {
             console.log(data.token);
             writecookie("jwt_token",data.token,7);
             props.setLoggedIn(true);
+            setRegistered(true);
+
         } catch (error) {
-            console.log(error)
+            console.log('Error during registration:', error.message);
+        } finally {
+            setLoading(false);
         }
     }
 
     function handleSubmit(event) {
         event.preventDefault();
-        sendRegisterToBackEnd()
+        sendRegisterToBackEnd(email, password)
     }
-     console.log(props.email)
+    //  console.log(props.email)
     return (
         <div className=" all-container box-container">
         <div className="box">
@@ -61,7 +66,7 @@ function Register(props) {
                 </input>
                 <br></br>
                 
-                <input className="input-bt" type="submit" value="Sign Up"/>
+                <input className="input-bt" type="submit" value={loading ? "Loading..." : "Sign Up"} disabled={loading}/>
             </form>
            
         </div>

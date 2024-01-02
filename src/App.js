@@ -11,6 +11,9 @@ import Insta from './components/InstagramPage';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [registered, setRegistered] = useState(false);
 
   return (
     <div className="App">
@@ -32,8 +35,26 @@ function App() {
         <Routes>
           {!loggedIn && (
             <>
-              <Route path="/" element={<Login setLoggedIn={setLoggedIn} />} />
-              <Route path="/signup" element={<Register setLoggedIn={setLoggedIn} />} />
+              <Route path="/" element={
+                <Login                         
+                  setEmail={setEmail}
+                  email={email}
+                  setPassword={setPassword}
+                  password={password}
+                  setLoggedIn={setLoggedIn}
+                  registered={registered} />
+                } 
+              />
+              <Route path="/signup" element={
+                <Register                         
+                    setEmail={setEmail}
+                    email={email}
+                    setPassword={setPassword}
+                    password={password}
+                    setLoggedIn={setLoggedIn}
+                    setRegistered={setRegistered} />
+                  } 
+                />
             </>
           )}
           <Route path="/logout" element={<Logout />} />
