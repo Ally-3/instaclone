@@ -1,7 +1,6 @@
 import { writecookie } from "../utils/utilities";
 import instatext from '../images/instatext.png';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 function Register(props) {
     const [email, setEmail] = useState('');
@@ -35,10 +34,12 @@ function Register(props) {
     }
      console.log(props.email)
     return (
+        <div className=" all-container box-container">
         <div className="box">
             <form onSubmit={handleSubmit}>
                 <img src={instatext} alt="Logo" width="180px" />
                 <br></br>
+                <h3>Sign up to see photos and videos from your friends.</h3>
                 <label htmlFor="email"></label>
                 <input 
                     className="emailbox" 
@@ -59,8 +60,26 @@ function Register(props) {
                     onChange = {(event) => setPassword(event.target.value)}>
                 </input>
                 <br></br>
+                
                 <input className="input-bt" type="submit" value="Sign Up"/>
             </form>
+           
+        </div>
+        <br></br>
+        <div className="box2">
+            {/* <div>
+                <h5>People who use our srevice may have uploaded your contact information to Instagram. <a href="#">Learn more</a></h5>
+                <h5>By signing up, you agree to our <a href="#">Terms</a>. Learn how we collect, use and share your data in our <a href="#">Policy</a> and how we use cookies and similar technology in our <a>Cookies Policy</a>.</h5>
+            </div> */}
+            <h4>If you already have an account, please log in: <a 
+                style={{
+                    textDecoration: 'none', 
+                    color: 'rgb(0, 174, 255)',
+                    fontWeight: 'bold',
+                }} 
+                href="./">Log in</a>
+            </h4>
+            </div>
         </div>
     )
 };

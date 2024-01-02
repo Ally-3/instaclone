@@ -38,7 +38,7 @@ function Insta() {
     // Use the memoized function in useEffect
     useEffect(() => {
         fetchImagesMemoized();
-    }, []);
+    }, [fetchImagesMemoized]);
 
   return (
     <div>

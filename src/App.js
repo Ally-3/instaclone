@@ -8,6 +8,7 @@ import Logout from './components/logout';
 import Footer from './components/footer';
 import Insta from './components/InstagramPage';
 
+
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -15,7 +16,7 @@ function App() {
     <div className="App">
       <Router>
 
-        {/* {loggedIn && (
+        {loggedIn && (
           <>
             <header>
               <Link to="/"><img src={instatext} alt="Logo" width="120px" /></Link>
@@ -26,20 +27,21 @@ function App() {
             <Insta />
             <Footer />
           </>
-        )} */}
+        )}
 
         <Routes>
-          {/* {!loggedIn && (
+          {!loggedIn && (
             <>
               <Route path="/" element={<Login setLoggedIn={setLoggedIn} />} />
               <Route path="/signup" element={<Register setLoggedIn={setLoggedIn} />} />
             </>
-          )} */}
+          )}
           <Route path="/logout" element={<Logout />} />
           <Route path="/InstagramPage" element={<Insta />} />
           <Route path="/footer" element={<Footer />} />
         </Routes>
-        <Insta />
+
+        {/* <Insta /> */}
 
       </Router>
     </div>
